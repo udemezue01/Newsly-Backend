@@ -1,15 +1,15 @@
 import graphene
 from graphene_django.types import DjangoObjectType
-
-
 from django.contrib.auth import get_user_model
+
+
 User = get_user_model()
 
 
 # Local Model Import
 
-from post.models import Post
-from portfolio.models import Portfolio
+from post.models import Post, Tag
+
 from userprofile.models import Profile
 
 
@@ -34,13 +34,13 @@ class ProfileType(DjangoObjectType):
 
 
 
-class PortfolioType(DjangoObjectType):
+class TagType(DjangoObjectType):
 
 	image 	= graphene.String()
 
 	class Meta:
 
-		model = Portfolio
+		model = Tag
 
 	def resolve_image(self, info):
 		return info.context.build_absolute_uri(self.image.url)
@@ -65,8 +65,8 @@ class Query(object):
 
 	# The Portfolio List and Detail
 
-	portfolios 		= 	graphene.List(PortfolioType)
-	portfolio 		= 	graphene.Field(PortfolioType, id = graphene.Int())
+	portfolios 		= 	graphene.List(TagType)
+	portfolio 		= 	graphene.Field(TagType, id = graphene.Int())
 
 
 	def resolve_me(root, info, **kwargs):

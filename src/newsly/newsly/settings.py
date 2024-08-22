@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'account',
     'post',
     'userprofile',
 
@@ -129,10 +130,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# The Auth User Model
+
+AUTH_USER_MODEL = 'account.user'
+
+
 #GraphQL Schema
 
 GRAPHENE = {
-    "SCHEMA": "newsly.schema.schema"
+    "SCHEMA": "newsly.graph.schema.schema"
 }
 
 
